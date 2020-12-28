@@ -1,0 +1,21 @@
+version: '2'
+services:
+  keydb:
+    container_name: redis
+    image: eqalpha/keydb
+  screenshotter:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - keydb
+    environment:
+      - 'REDIS_URI=redis://redis:6379'
+      - PORT=3000
+      - ADDRESS=0.0.0.0
+      - 'SELENIUM_REMOTE_URL=http://firefox:4444/wd/hub'
+  standalone-firefox:
+    container_name: firefox
+    image: selenium/standalone-firefox
+    volumes:
+      - '/dev/shm :/dev/shm '
