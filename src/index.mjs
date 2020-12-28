@@ -10,6 +10,7 @@ const queue = new Queue(async ({url,size},done)=>{
     try {
         await driver.get(url)
     } catch (error) {
+        console.log(error,'navigate_url_fail')
         done(Error('navigate_url_fail'))
         return
     }
@@ -17,12 +18,13 @@ const queue = new Queue(async ({url,size},done)=>{
     try {
         screenshot = await driver.takeScreenshot()
     } catch (error) {
+        console.log(error,'screenshot_fail')
         done(Error('screenshot_fail'))
         return
     }
     driver.quit();
     done(null,Buffer.from(screenshot,'base64'))
-},20)
+},2)
 
 const fastify = Fastify({
     ignoreTrailingSlash:true
