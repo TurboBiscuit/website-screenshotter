@@ -16,6 +16,6 @@ services:
       - 'SELENIUM_REMOTE_URL=http://firefox:4444/wd/hub'
   standalone-firefox:
     container_name: firefox
-    image: selenium/standalone-firefox
+    image: selenium/standalone-firefox:4.0.0-beta-1-prerelease-20201208
     volumes:
       - '/dev/shm :/dev/shm '
